@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace blogger_server.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UserController
     {
         private readonly AppDbContext _context;
@@ -16,8 +18,18 @@ namespace blogger_server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            var users = await _context.users.ToListAsync();
+            var users = await _context.Users.ToListAsync();
             return users;
         }
+
+        /*[HttpPut("{id}")]
+        public async Task<ActionResult<User>> UpdateUser(int id)
+        {
+            var findUser = await _context.users.FindAsync(id);
+            if(findUser == null)
+            {
+                return 
+            }
+        }*/
     }
 }
