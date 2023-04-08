@@ -7,7 +7,7 @@ namespace blogger_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController
+    public class UserController : ControllerBase
     {
         private readonly AppDbContext _context;
         public UserController(AppDbContext context)
@@ -22,14 +22,17 @@ namespace blogger_server.Controllers
             return users;
         }
 
-        /*[HttpPut("{id}")]
-        public async Task<ActionResult<User>> UpdateUser(int id)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<User>> UpdateUser(int id, User user)
         {
-            var findUser = await _context.users.FindAsync(id);
-            if(findUser == null)
+            if(id != user.Id)
             {
-                return 
+                return NotFound("Not Found!");
             }
-        }*/
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok("Updated");
+        }
     }
 }
