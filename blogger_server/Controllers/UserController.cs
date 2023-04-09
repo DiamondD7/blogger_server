@@ -34,5 +34,15 @@ namespace blogger_server.Controllers
             await _context.SaveChangesAsync();
             return Ok("Updated");
         }
+
+        [HttpPost]
+        public async Task<ActionResult<User>> AddUser(User user)
+        {
+            
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return Ok("Added");
+
+        }
     }
 }
