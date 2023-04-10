@@ -44,5 +44,19 @@ namespace blogger_server.Controllers
             return Ok("Added");
 
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<User>> DeleteUser(int id)
+        {
+            var findUser = await _context.Users.FindAsync(id);
+            if(findUser == null)
+            {
+                return NotFound();
+            }
+
+            _context.Users.Remove(findUser);
+            await _context.SaveChangesAsync();
+            return Ok("Deleted");
+        }
     }
 }
