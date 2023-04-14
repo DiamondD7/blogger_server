@@ -19,5 +19,7 @@ namespace blogger_server.Model
         public string UserUserName { get; set; }
         [Required(ErrorMessage = "Password is required")]
         public string UserPassword { get; set; }
+
+        public List<SecurityQuestion> SecurityQuestions { get; set; }
     }
 }
