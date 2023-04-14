@@ -18,6 +18,8 @@ namespace blogger_server
 
             // Configure the HTTP request pipeline.
 
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
